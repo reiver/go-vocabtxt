@@ -34,11 +34,6 @@ func LoadFromBytes(destination *map[string]uint, bytes []byte) error {
 	var str string = unsafe.String(&bytes[0], len(bytes))
 	for _, r := range str {
 		if '\n' == r {
-			if 0 < len(key) {
-				if '\r' == key[len(key)-1] {
-					key = key[:len(key)-1]
-				}
-			}
 			(*destination)[strings.TrimFunc(string(key), isSpacing)] = index
 			key = keyBuffer[0:0]
 			index++
