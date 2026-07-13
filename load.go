@@ -16,6 +16,9 @@ func LoadFromBytes(destination *map[string]uint, bytes []byte) error {
 	if nil == destination {
 		return ErrMapNil
 	}
+	if nil == *destination {
+		*destination = map[string]uint{}
+	}
 	if 0 < len(*destination) {
 		return ErrMapNotEmpty
 	}

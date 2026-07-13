@@ -207,3 +207,14 @@ func TestLoadFromBytes(t *testing.T) {
 		}
 	}
 }
+
+func TestLoadFromBytes_nilMap(t *testing.T) {
+	var bytes []byte = []byte("apple\nbanana\ncherry\n")
+
+	var actual map[string]uint = map[string]uint(nil)
+
+	err := vocabtxt.LoadFromBytes(&actual, bytes)
+	if nil != err {
+		t.Errorf("Did not expect an error but actually got one.")
+	}
+}
