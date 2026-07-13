@@ -1,6 +1,7 @@
 package vocabtxt
 
 import (
+	"strings"
 	"unsafe"
 )
 
@@ -38,7 +39,7 @@ func LoadFromBytes(destination *map[string]uint, bytes []byte) error {
 					key = key[:len(key)-1]
 				}
 			}
-			(*destination)[string(key)] = index
+			(*destination)[strings.TrimFunc(string(key), isSpacing)] = index
 			key = keyBuffer[0:0]
 			index++
 			continue
@@ -50,7 +51,7 @@ func LoadFromBytes(destination *map[string]uint, bytes []byte) error {
 		}
 	}
 	if 0 < len(key) {
-		(*destination)[string(key)] = index
+		(*destination)[strings.TrimFunc(string(key), isSpacing)] = index
 	}
 
 	return nil

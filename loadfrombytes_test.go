@@ -148,6 +148,21 @@ func TestLoadFromBytes(t *testing.T) {
 
 		{
 			Bytes:    []byte(
+				" apple\t"   +"\r\n"+
+				"\t\tbanana " +"\r\n"+
+				"cherry"   +"\r\n",
+			),
+			Expected: map[string]uint{
+				"apple":0,
+				"banana":1,
+				"cherry":2,
+			},
+		},
+
+
+
+		{
+			Bytes:    []byte(
 				"the"  +"\n"+
 				"of"   +"\n"+
 				"and"  +"\n"+
