@@ -3,6 +3,7 @@
 package vocabtxt
 
 import (
+	"math"
 	"os"
 
 	"codeberg.org/reiver/go-erorr"
@@ -33,8 +34,19 @@ func LoadFromFile(destination *map[string]uint, filename string) error {
 	if size <= 0 {
 		return nil
 	}
+	if math.MaxInt < size {
+		bytes, err := os.ReadFile(filename)
+		if nil != err {
+			err = erorr.Wrap(err, "failed to read file",
+				field.String("file-name", filename),
+			)
+			return err
+		}
 
-	bytes, err := unix.Mmap(int(file.Fd()), 0, int(size), unix.PROT_READ, unix.MAP_SHARED)
+		return LoadFromBytes(destination, bytes)
+	}
+
+	bytes, err := unix.Mmap(int(file.Fd()), 0, int(size), unix.PROT_READ, unix.MAP_PRIVATE)
 	if nil != err {
 		err = erorr.Wrap(err, "failed to mmap file",
 			field.String("file-name", filename),
