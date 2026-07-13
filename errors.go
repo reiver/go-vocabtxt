@@ -7,4 +7,5 @@ import	(
 const (
 	ErrMapNil      = erorr.Error("nil map")
 	ErrMapNotEmpty = erorr.Error("map not empty")
+	ErrTokenTooBig = erorr.Error("token too big")
 )
