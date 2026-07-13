@@ -8,7 +8,7 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-// LoadFromBytes loads (WordPiece) "vocab.txt" data from a file into a map[string]uint.
+// LoadFromFile loads (WordPiece) "vocab.txt" data from a file into a map[string]uint.
 func LoadFromFile(destination *map[string]uint, filename string) error {
 	file, err := os.Open(filename)
 	if nil != err {
