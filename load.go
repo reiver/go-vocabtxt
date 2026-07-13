@@ -4,7 +4,7 @@ import (
 	"unsafe"
 )
 
-const maxKey = 1073741824
+const maxKey = 268435456
 
 // LoadFromBytes loads (WordPiece) "vocab.txt" data from a []byte into a map[string]uint.
 func LoadFromBytes(destination *map[string]uint, bytes []byte) error {
